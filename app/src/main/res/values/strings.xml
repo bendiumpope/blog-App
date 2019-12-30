@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Blog Application</string>
+    <string name="splash_text">SHARE WHATS ON YOUR MIND</string>
+    <string name="splash_bottom">Blog Application. 2019</string>
+</resources>
