@@ -1,5 +1,6 @@
 package com.itex.blogapplication.ui.auth
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
@@ -11,7 +12,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.itex.blogapplication.R
+import com.itex.blogapplication.data.db.AppDatabase
+import com.itex.blogapplication.data.db.entities.User
+import com.itex.blogapplication.data.network.MyApi
+import com.itex.blogapplication.data.repositories.UserRepository
 import com.itex.blogapplication.databinding.ActivityLoginBinding
+import com.itex.blogapplication.ui.Home.HomeActivity
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity(), AuthListener {
@@ -19,13 +25,30 @@ class LoginActivity : AppCompatActivity(), AuthListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        val api = MyApi()
+        val db=AppDatabase(this)
+        val repository = UserRepository(api, db)
+        val factory = AuthViewModelFactory(repository)
+
         val binding:ActivityLoginBinding = DataBindingUtil.setContentView(this, R.layout.activity_login)
 
-        val viewModel = ViewModelProviders.of(this).get(AuthViewModel::class.java)
+        val viewModel = ViewModelProviders.of(this, factory).get(AuthViewModel::class.java)
 
         binding.viewmodel = viewModel
 
         viewModel.authListener = this
+
+        viewModel.getLoggedInUser().observe(this, Observer{user ->
+
+            if(user !=null){
+
+                Intent(this, HomeActivity::class.java).also {
+                    it.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+
+                    startActivity(it)
+                }
+            }
+        })
 
 
         emailLogin.addTextChangedListener(object : TextWatcher {
@@ -50,13 +73,9 @@ class LoginActivity : AppCompatActivity(), AuthListener {
 
     }
 
-    override fun onSuccess(loginResponse: LiveData<String>) {
+    override fun onSuccess(user: User) {
 
-        loginResponse.observe(this, Observer {
-            Toast.makeText(this, "$it", Toast.LENGTH_LONG).show()
-        })
-
-
+//        Toast.makeText(this, "${user.name} is Logged In", Toast.LENGTH_LONG).show()
     }
 
     override fun onFailureOne() {
@@ -69,7 +88,7 @@ class LoginActivity : AppCompatActivity(), AuthListener {
     }
 
     override fun onFailureTwo() {
-        passwordLogin.setBackgroundResource(R.drawable.error_drawable)
+        emailLogin.setBackgroundResource(R.drawable.error_drawable)
         error_one.visibility = View.GONE
         error_three.visibility = View.GONE
         error_two.visibility = View.VISIBLE
@@ -90,6 +109,11 @@ class LoginActivity : AppCompatActivity(), AuthListener {
         error_two.visibility = View.VISIBLE
         error_one.visibility=View.GONE
         error_three.visibility=View.VISIBLE
+    }
+
+    override fun onFailureError(massage:String) {
+
+        Toast.makeText(this, "$massage occured", Toast.LENGTH_LONG).show()
     }
 
 

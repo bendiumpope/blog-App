@@ -1,12 +1,13 @@
 package com.itex.blogapplication.ui.auth
 
 import androidx.lifecycle.LiveData
+import com.itex.blogapplication.data.db.entities.User
 
 interface AuthListener {
 
     fun onStarted()
 
-    fun onSuccess(loginResponse: LiveData<String>)
+    fun onSuccess(user: User)
 
     fun onFailureOne()
 
@@ -15,5 +16,7 @@ interface AuthListener {
     fun onFailureThree()
 
     fun onFailureFour()
+
+    fun onFailureError(massage:String)
 
 }

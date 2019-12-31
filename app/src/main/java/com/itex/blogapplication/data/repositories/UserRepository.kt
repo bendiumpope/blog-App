@@ -1,40 +1,24 @@
 package com.itex.blogapplication.data.repositories
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import com.itex.blogapplication.data.db.AppDatabase
+import com.itex.blogapplication.data.db.entities.User
 import com.itex.blogapplication.data.network.MyApi
-import okhttp3.ResponseBody
-import retrofit2.Call
-import retrofit2.Callback
+import com.itex.blogapplication.data.network.SafeApiRequest
+import com.itex.blogapplication.data.network.responses.AuthResponse
 import retrofit2.Response
 
-class UserRepository {
 
-    fun userLogin(email:String, password: String): LiveData<String>{
 
-        val loginResponse =MutableLiveData<String>()
+class UserRepository(
+    private val api: MyApi,
+    private val db: AppDatabase): SafeApiRequest() {
 
-        MyApi().userLogin(email, password)
-            .enqueue(object: Callback<ResponseBody>{
-                override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-                    loginResponse.value = t.message
-                }
+    suspend fun userLogin(email:String, password: String): AuthResponse{
 
-                override fun onResponse(
-                    call: Call<ResponseBody>,
-                    response: Response<ResponseBody>
-                ) {
-                  if(response.isSuccessful){
-                      loginResponse.value = response.body()?.string()
-
-                  }else{
-
-                      loginResponse.value = response.errorBody()?.string()
-                  }
-                }
-
-            })
-
-        return loginResponse
+        return apiRequest { api.userLogin(email,password) }
     }
+
+    suspend fun saveUser(user: User) = db.getUserDao().userin(user)
+
+    fun getUser() = db.getUserDao().getuser()
 }
