@@ -1,11 +1,8 @@
 package com.itex.blogapplication.ui.auth
 
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.View
 import androidx.lifecycle.ViewModel
-import com.itex.blogapplication.R
-import kotlinx.android.synthetic.main.activity_login.*
+import com.itex.blogapplication.data.repositories.UserRepository
 
 class AuthViewModel : ViewModel(){
 
@@ -14,8 +11,6 @@ class AuthViewModel : ViewModel(){
 
 
     var authListener: AuthListener?=null
-
-    val emailPattern = ("[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+").toRegex()
 
     fun onLoginButtonClick(view:View){
         authListener?.onStarted()
@@ -36,15 +31,11 @@ class AuthViewModel : ViewModel(){
             authListener?.onFailureThree()
 
             return
-        }else if(email!!.trim().matches(emailPattern)){
-
-            authListener?.onSuccess()
-        }else{
-
-            authListener?.onFailureOne()
         }
 
+        val loginResponse = UserRepository().userLogin(email!!, password!!)
 
+        authListener?.onSuccess(loginResponse)
 
     }
 

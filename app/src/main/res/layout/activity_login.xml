@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        
+
         <variable
             name="viewmodel"
             type="com.itex.blogapplication.ui.auth.AuthViewModel" />
@@ -16,10 +15,11 @@
         android:id="@+id/root_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.auth.LoginActivity"
-        android:background="@color/colorAuth">
+        android:background="@color/colorAuth"
+        tools:context=".ui.auth.LoginActivity">
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/cardView"
             android:layout_width="347dp"
             android:layout_height="408dp"
             android:layout_marginStart="10dp"
@@ -51,7 +51,7 @@
                     android:id="@+id/userLogin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="80dp"
+                    android:layout_marginTop="20dp"
                     android:text="Username"
                     android:textColor="@color/colorAuth"
                     android:textSize="16sp"
@@ -62,10 +62,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="@={viewmodel.email}"
                     android:ems="10"
                     android:hint="Email"
-                    android:inputType="textEmailAddress" />
+                    android:inputType="textEmailAddress"
+                    android:text="@={viewmodel.email}" />
 
                 <TextView
                     android:id="@+id/error_one"
@@ -104,10 +104,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="@={viewmodel.password}"
                     android:ems="10"
                     android:hint="Password"
-                    android:inputType="textPassword" />
+                    android:inputType="textPassword"
+                    android:paddingLeft="12dp"
+                    android:text="@={viewmodel.password}" />
 
                 <TextView
                     android:id="@+id/error_three"
@@ -132,12 +133,12 @@
                     android:visibility="gone" />
 
                 <Button
-                    android:onClick="@{viewmodel::onLoginButtonClick}"
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginTop="8dp"
                     android:background="@drawable/button_drawable"
+                    android:onClick="@{viewmodel::onLoginButtonClick}"
                     android:text="Login"
                     android:textColor="#fff"
                     android:textStyle="bold" />
@@ -154,5 +155,6 @@
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

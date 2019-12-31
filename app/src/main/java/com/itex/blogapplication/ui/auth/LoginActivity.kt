@@ -7,6 +7,8 @@ import android.text.TextWatcher
 import android.view.View
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.itex.blogapplication.R
 import com.itex.blogapplication.databinding.ActivityLoginBinding
@@ -48,15 +50,20 @@ class LoginActivity : AppCompatActivity(), AuthListener {
 
     }
 
-    override fun onSuccess() {
-        Toast.makeText(this, "Logged in successful", Toast.LENGTH_LONG).show()
+    override fun onSuccess(loginResponse: LiveData<String>) {
+
+        loginResponse.observe(this, Observer {
+            Toast.makeText(this, "$it", Toast.LENGTH_LONG).show()
+        })
+
+
     }
 
     override fun onFailureOne() {
 
         emailLogin.setBackgroundResource(R.drawable.error_drawable)
-        error_two.visibility = View.GONE
         error_one.visibility=View.VISIBLE
+        error_two.visibility = View.GONE
         error_three.visibility=View.GONE
 
     }
