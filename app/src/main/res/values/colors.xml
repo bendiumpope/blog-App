@@ -5,4 +5,6 @@
     <color name="colorAccent">#D81B60</color>
     <color name="colorAuth">#5DADE2</color>
     <color name="boxShadowsColor">#FBFBFD</color>
+    <color name="colorDark">#000000</color>
+
 </resources>

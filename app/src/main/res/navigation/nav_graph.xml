@@ -1,5 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/nav_graph">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/blogFragment">
 
+    <fragment
+        android:id="@+id/blogFragment"
+        android:name="com.itex.blogapplication.ui.home.blog.BlogFragment"
+        android:label="blogs"
+        tools:layout="@layout/blog_fragment" >
+        <action
+            android:id="@+id/action_blogFragment_to_addBlogFragment"
+            app:destination="@id/addBlogFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addBlogFragment"
+        android:name="com.itex.blogapplication.ui.home.addblog.AddBlogFragment"
+        android:label="add_blog_fragment"
+        tools:layout="@layout/add_blog_fragment" />
 </navigation>

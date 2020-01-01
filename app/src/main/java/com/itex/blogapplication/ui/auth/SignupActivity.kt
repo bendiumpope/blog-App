@@ -14,7 +14,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.itex.blogapplication.R
 import com.itex.blogapplication.data.db.entities.User
 import com.itex.blogapplication.databinding.ActivitySignupBinding
-import com.itex.blogapplication.ui.Home.HomeActivity
+import com.itex.blogapplication.ui.home.HomeActivity
 import kotlinx.android.synthetic.main.activity_signup.*
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.kodein

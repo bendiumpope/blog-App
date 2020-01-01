@@ -2,9 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:title="Home"
-        android:id="@+id/fragmentHome"/>
+        android:title="Blogs"
+        android:id="@+id/blogFragment"/>
     <item
-        android:title="New Blog"
-        android:id="@+id/fragmentAddBlog"/>
+        android:title="Add Blog"
+        android:id="@+id/addBlogFragment"/>
 </menu>
