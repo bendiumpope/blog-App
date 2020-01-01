@@ -148,6 +148,7 @@
                     android:layout_height="30dp"
                     android:layout_gravity="center"
                     android:layout_margin="12dp"
+                    android:onClick="@{viewmodel::OnSignup}"
                     android:text="Dont have an Account? Sign Up"
                     android:textColor="@color/colorAuth"
                     android:textSize="16sp"

@@ -1,6 +1,5 @@
 package com.itex.blogapplication.ui.auth
 
-import androidx.lifecycle.LiveData
 import com.itex.blogapplication.data.db.entities.User
 
 interface AuthListener {
@@ -16,6 +15,12 @@ interface AuthListener {
     fun onFailureThree()
 
     fun onFailureFour()
+
+    fun onFailureFive()
+
+    fun onFailureSix()
+
+    fun onFailureSeven()
 
     fun onFailureError(massage:String)
 

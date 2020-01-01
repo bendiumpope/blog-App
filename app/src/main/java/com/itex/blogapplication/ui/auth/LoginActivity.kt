@@ -1,34 +1,33 @@
 package com.itex.blogapplication.ui.auth
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.itex.blogapplication.R
-import com.itex.blogapplication.data.db.AppDatabase
 import com.itex.blogapplication.data.db.entities.User
-import com.itex.blogapplication.data.network.MyApi
-import com.itex.blogapplication.data.repositories.UserRepository
 import com.itex.blogapplication.databinding.ActivityLoginBinding
 import com.itex.blogapplication.ui.Home.HomeActivity
 import kotlinx.android.synthetic.main.activity_login.*
+import org.kodein.di.KodeinAware
+import org.kodein.di.android.kodein
+import org.kodein.di.generic.instance
 
-class LoginActivity : AppCompatActivity(), AuthListener {
+open class LoginActivity : AppCompatActivity(), AuthListener, KodeinAware {
+
+    override val kodein by kodein()
+
+    private val factory: AuthViewModelFactory by instance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val api = MyApi()
-        val db=AppDatabase(this)
-        val repository = UserRepository(api, db)
-        val factory = AuthViewModelFactory(repository)
 
         val binding:ActivityLoginBinding = DataBindingUtil.setContentView(this, R.layout.activity_login)
 
@@ -65,6 +64,22 @@ class LoginActivity : AppCompatActivity(), AuthListener {
                 passwordLogin.setBackgroundResource(R.drawable.input_drawable)
             }
         })
+
+        passwordLogin.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s : Editable?){}
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+            }
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                error_two.visibility = View.GONE
+                error_three.visibility = View.GONE
+                error_one.visibility = View.GONE
+
+                emailLogin.setBackgroundResource(R.drawable.input_drawable)
+                passwordLogin.setBackgroundResource(R.drawable.input_drawable)
+            }
+        })
+
 
     }
 
@@ -111,9 +126,18 @@ class LoginActivity : AppCompatActivity(), AuthListener {
         error_three.visibility=View.VISIBLE
     }
 
+    override fun onFailureFive() {
+    }
+
+    override fun onFailureSix() {
+    }
+
+    override fun onFailureSeven() {
+    }
+
     override fun onFailureError(massage:String) {
 
-        Toast.makeText(this, "$massage occured", Toast.LENGTH_LONG).show()
+        Toast.makeText(this, "$massage", Toast.LENGTH_LONG).show()
     }
 
 

@@ -1,8 +1,7 @@
 package com.itex.blogapplication.data.network
 
 import com.itex.blogapplication.data.network.responses.AuthResponse
-import okhttp3.ResponseBody
-import retrofit2.Call
+import okhttp3.OkHttpClient
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -20,9 +19,28 @@ interface MyApi {
         @Field("password") password: String
     ): Response<AuthResponse>
 
+    @FormUrlEncoded
+    @POST("signup")
+    suspend fun userSignup(
+
+        @Field("name") name: String,
+        @Field("email") email: String,
+        @Field("password") password: String
+    ): Response<AuthResponse>
+
     companion object{
-        operator fun invoke(): MyApi{
+        operator fun invoke(
+            networkConnectionInterceptor: NetworkConnectionInterceptor
+        ): MyApi{
+
+            val okkHttpClient = OkHttpClient.Builder()
+                .addInterceptor(networkConnectionInterceptor)
+                .build()
+
+
+
             return Retrofit.Builder()
+                .client(okkHttpClient)
                 .baseUrl("https://api.simplifiedcoding.in/course-apis/mvvm/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
