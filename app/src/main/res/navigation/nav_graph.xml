@@ -25,7 +25,7 @@
     <fragment
         android:id="@+id/addBlogFragment"
         android:name="com.itex.blogapplication.ui.home.addblog.AddBlogFragment"
-        android:label="add_blog_fragment"
+        android:label="Add Blog"
         tools:layout="@layout/add_blog_fragment">
 
         <argument
@@ -34,8 +34,8 @@
     </fragment>
     <fragment
         android:id="@+id/specificBlogFragment"
-        android:name="com.itex.blogapplication.ui.home.profile.SpecificBlogFragment"
-        android:label="SpecificBlogFragment"
+        android:name="com.itex.blogapplication.ui.home.singleBlog.SpecificBlogFragment"
+        android:label="View Blog"
         tools:layout="@layout/specific_fragment">
 
         <argument
