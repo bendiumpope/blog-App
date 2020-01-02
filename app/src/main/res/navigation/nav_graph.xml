@@ -13,10 +13,38 @@
         <action
             android:id="@+id/action_blogFragment_to_addBlogFragment"
             app:destination="@id/addBlogFragment" />
+
+        <argument
+            android:name="image"
+            app:argType="string"
+            app:nullable="true" />
+        <action
+            android:id="@+id/action_blogFragment_to_specificBlogFragment2"
+            app:destination="@id/specificBlogFragment" />
     </fragment>
     <fragment
         android:id="@+id/addBlogFragment"
         android:name="com.itex.blogapplication.ui.home.addblog.AddBlogFragment"
         android:label="add_blog_fragment"
-        tools:layout="@layout/add_blog_fragment" />
+        tools:layout="@layout/add_blog_fragment">
+
+        <argument
+            android:name="blog"
+            app:argType="com.itex.blogapplication.ui.home.blog.Blog" />
+    </fragment>
+    <fragment
+        android:id="@+id/specificBlogFragment"
+        android:name="com.itex.blogapplication.ui.home.profile.SpecificBlogFragment"
+        android:label="SpecificBlogFragment"
+        tools:layout="@layout/specific_fragment">
+
+        <argument
+            android:name="blog"
+            app:argType="com.itex.blogapplication.ui.home.blog.Blog" />
+
+        <argument
+            android:name="image"
+            app:argType="string"
+            app:nullable="true" />
+    </fragment>
 </navigation>
