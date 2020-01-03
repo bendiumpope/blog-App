@@ -9,23 +9,19 @@
             type="com.itex.blogapplication.ui.home.blog.Blog" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:id="@+id/root_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorAuth"
-        tools:context=".ui.auth.LoginActivity">
+        tools:context=".ui.auth.LoginActivity"
+        android:gravity="center">
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="20dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="12dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -117,7 +113,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
-                            android:text="Title"
+                            android:text="Topic"
                             android:textColor="@color/colorAuth"
                             android:textSize="16sp"
                             android:textStyle="bold" />
@@ -129,7 +125,7 @@
                             android:layout_marginTop="8dp"
                             android:ems="10"
                             android:text="@={blogs.title}"
-                            android:hint="Title"
+                            android:hint="Topic"
                             android:inputType="text"
                             android:paddingLeft="12dp" />
 
@@ -195,5 +191,5 @@
 
         </ScrollView>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 </layout>

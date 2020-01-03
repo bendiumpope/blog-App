@@ -11,25 +11,23 @@
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:id="@+id/root_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorAuth"
-        tools:context=".ui.auth.LoginActivity">
+        tools:context=".ui.auth.LoginActivity"
+        android:orientation="vertical"
+        android:gravity="center">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView"
-            android:layout_width="347dp"
-            android:layout_height="408dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="80dp"
-            android:layout_marginEnd="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
             app:cardCornerRadius="30dp"
             app:cardElevation="7dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:layout_margin="12dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -157,5 +155,5 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 </layout>

@@ -24,6 +24,11 @@ class BlogViewModel: ViewModel() {
         return BlogDB.createDB(context).BlogDao().insertBlog(blog)
     }
 
+    fun updateBlog(blog:Blog, context: Context){
+
+        return BlogDB.createDB(context).BlogDao().updateBlog(blog)
+    }
+
     fun deleteBlogs(blog: Blog, context: Context){
         return BlogDB.createDB(context).BlogDao().deleteBlog(blog)
     }
@@ -31,4 +36,5 @@ class BlogViewModel: ViewModel() {
     private fun loadBlogs() {
         // Do an asynchronous operation to fetch users.
     }
+
 }

@@ -28,9 +28,12 @@
         android:label="Add Blog"
         tools:layout="@layout/add_blog_fragment">
 
+
         <argument
-            android:name="blog"
-            app:argType="com.itex.blogapplication.ui.home.blog.Blog" />
+            android:name="blogs"
+            app:argType="com.itex.blogapplication.ui.home.blog.Blog"
+            app:nullable="true"
+            android:defaultValue="@null"/>
     </fragment>
     <fragment
         android:id="@+id/specificBlogFragment"

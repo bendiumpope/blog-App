@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:text="Blog Posts"
             android:textAlignment="center"
-            android:textColor="@color/colorAuth"
+            android:textColor="@color/colorDark"
             android:textSize="24dp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
