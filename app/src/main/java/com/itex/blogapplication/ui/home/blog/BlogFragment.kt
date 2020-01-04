@@ -16,7 +16,7 @@ import com.itex.blogapplication.databinding.BlogFragmentBinding
 import kotlinx.android.synthetic.main.add_blog_fragment.*
 
 
-class BlogFragment : Fragment() {
+class BlogFragment: Fragment() {
 
 
     override fun onCreateView(
@@ -32,8 +32,6 @@ class BlogFragment : Fragment() {
 
         recyclerView.layoutManager = LinearLayoutManager(context)
 
-        val imageUrl="https://cdn.vox-cdn.com/thumbor/wI3iu8sNbFJSQB4yMLsoPMNzIHU=/0x0:3368x3368/1200x800/filters:focal(1188x715:1726x1253)/cdn.vox-cdn.com/uploads/chorus_image/image/62994726/AJ_Finn_author_photo_color_photo_courtesy_of_the_author.0.jpg"
-
 
         var adapter =
             BlogAdapter(object :
@@ -43,7 +41,7 @@ class BlogFragment : Fragment() {
                 override fun OnItemClick(blog: Blog){
 
                  val action = BlogFragmentDirections.actionBlogFragmentToSpecificBlogFragment2(
-                            blog,imageUrl
+                            blog
                  )
                     findNavController().navigate(action)
                 }

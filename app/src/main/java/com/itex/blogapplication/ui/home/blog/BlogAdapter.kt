@@ -1,15 +1,17 @@
 package com.itex.blogapplication.ui.home.blog
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.itex.blogapplication.data.db.OnItemClickListener
 import com.itex.blogapplication.databinding.BlogListBinding
 
 class BlogAdapter(
-    val onItemClickListener: OnItemClickListener,
+    private val onItemClickListener: OnItemClickListener,
     var model: BlogViewModel,
     var context: Context): RecyclerView.Adapter<BlogAdapter.BlogViewHolder>(){
 
@@ -39,10 +41,12 @@ class BlogAdapter(
             Navigation.findNavController(it).navigate(action)
 
         }
+
         holder.binding.imageView4.setOnClickListener {
 
             model.deleteBlogs(blog, holder.binding.imageView4.context)
         }
+        Glide.with(context).load(blog.img_url).into(holder.binding.imageView3)
 
     }
 

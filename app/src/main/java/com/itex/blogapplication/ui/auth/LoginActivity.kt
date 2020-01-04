@@ -90,7 +90,7 @@ open class LoginActivity : AppCompatActivity(), AuthListener, KodeinAware {
 
     override fun onSuccess(user: User) {
 
-//        Toast.makeText(this, "${user.name} is Logged In", Toast.LENGTH_LONG).show()
+        Toast.makeText(this, "Welcome TO MIND BLOGS", Toast.LENGTH_LONG).show()
     }
 
     override fun onFailureOne() {

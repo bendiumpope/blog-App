@@ -59,7 +59,7 @@
                             android:layout_height="200dp"
                             android:layout_gravity="center"
                             android:layout_marginTop="20dp"
-                            android:src="@drawable/blog"
+                            android:src="@drawable/ic_image_black"
                             android:scaleType="fitXY"
                             android:textColor="@color/colorAuth"
                             android:textSize="16sp"
@@ -72,7 +72,7 @@
                             android:layout_gravity="center"
                             android:layout_marginTop="8dp"
                             android:elevation="5dp"
-                            android:text="Select Image"
+                            android:text="Choose Image"
                             android:textColor="@color/colorDark"
                             android:textSize="10dp"
                             android:textStyle="bold" />

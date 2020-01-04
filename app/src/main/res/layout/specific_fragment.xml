@@ -49,7 +49,7 @@
                             android:layout_height="100dp"
                             android:layout_gravity="center"
                             android:layout_marginTop="20dp"
-                            android:src="@drawable/blog"
+                            android:src="@{blogs.img_url}"
                             android:scaleType="fitXY"
                             android:textColor="@color/colorAuth"
                             android:textSize="16sp"

@@ -95,6 +95,8 @@ class AuthViewModel(
 
             authListener?.onFailureOne()
 
+            return
+
         }
         if(email.isNullOrEmpty()){
 

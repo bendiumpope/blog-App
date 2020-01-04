@@ -8,16 +8,12 @@
     <fragment
         android:id="@+id/blogFragment"
         android:name="com.itex.blogapplication.ui.home.blog.BlogFragment"
-        android:label="blogs"
-        tools:layout="@layout/blog_fragment" >
+        android:label="blog posts"
+        tools:layout="@layout/blog_fragment">
         <action
             android:id="@+id/action_blogFragment_to_addBlogFragment"
             app:destination="@id/addBlogFragment" />
 
-        <argument
-            android:name="image"
-            app:argType="string"
-            app:nullable="true" />
         <action
             android:id="@+id/action_blogFragment_to_specificBlogFragment2"
             app:destination="@id/specificBlogFragment" />
@@ -45,9 +41,5 @@
             android:name="blog"
             app:argType="com.itex.blogapplication.ui.home.blog.Blog" />
 
-        <argument
-            android:name="image"
-            app:argType="string"
-            app:nullable="true" />
     </fragment>
 </navigation>
