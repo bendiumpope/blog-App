@@ -2,7 +2,6 @@ package com.itex.blogapplication.ui.home.addblog
 
 import android.Manifest
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
@@ -21,15 +20,14 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.itex.blogapplication.R
-import com.itex.blogapplication.databinding.AddBlogFragmentBinding
 import com.itex.blogapplication.ui.home.blog.Blog
-import com.itex.blogapplication.ui.home.blog.BlogViewModel
+import com.itex.blogapplication.ui.home.model.BlogViewModel
 import kotlinx.android.synthetic.main.add_blog_fragment.*
 
 
 class AddBlogFragment : Fragment(){
 
-    private var blog:Blog?=null
+    private var blog: Blog?=null
     var imageaddress: Uri?=null
 
     override fun onCreateView(
@@ -39,11 +37,13 @@ class AddBlogFragment : Fragment(){
 
         val view = inflater.inflate(R.layout.add_blog_fragment, container, false)
 
-        val bot = view.findViewById<Button>(R.id.blogbtn)
-           bot.setOnClickListener {
+        //Handling the onclick on image selection from gallery
+        val gallerButton = view.findViewById<Button>(R.id.blogbtn)
+           gallerButton.setOnClickListener {
 
             if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
 
+                //Checking if permission to Read external storage is denied
                 if(checkSelfPermission(context!!, Manifest.permission.READ_EXTERNAL_STORAGE)==
                     PermissionChecker.PERMISSION_DENIED){
 
@@ -87,6 +87,7 @@ class AddBlogFragment : Fragment(){
 
     }
 
+    //Getting the user response from the permission popup
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
@@ -110,6 +111,8 @@ class AddBlogFragment : Fragment(){
         }
     }
 
+
+    //Getting the Image and setting it to the blogImage ImageView and as image URI
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if(resultCode==Activity.RESULT_OK && requestCode== IMAGE_PICK_CODE){
              imageaddress=data?.data
@@ -117,11 +120,13 @@ class AddBlogFragment : Fragment(){
         }
     }
 
+    //Handling Blog Update
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
         val model = ViewModelProviders.of(this)[BlogViewModel::class.java]
 
+        //Repopulating the editText
         arguments?.let {
             blog = AddBlogFragmentArgs.fromBundle(it).blogs
             authorName.setText(blog?.author)
@@ -130,6 +135,7 @@ class AddBlogFragment : Fragment(){
 
         }
 
+        //Removing error massage from authorName EditText on textchange
         authorName.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s : Editable?){}
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -146,6 +152,8 @@ class AddBlogFragment : Fragment(){
             }
         })
 
+
+        //Removing error massage from blogTitle EditText on textchange
         blogTitle.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s : Editable?){}
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -162,6 +170,8 @@ class AddBlogFragment : Fragment(){
             }
         })
 
+
+        //Removing error massage from blogStory EditText on textchange
         blogStory.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s : Editable?){}
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -179,33 +189,46 @@ class AddBlogFragment : Fragment(){
         })
 
 
+        //Adding Blog Post
         addBlogBtn.setOnClickListener {
 
-
+            //Getting the user input from the editText
             var author: String = authorName.text.toString().trim()
             var title: String = blogTitle.text.toString().trim()
             var story: String = blogStory.text.toString().trim()
 
+
+            //Checking if the author editText is empty or null
             if (author.isNullOrEmpty()) {
 
+                //setting error massage on author editText
                 authorName.setBackgroundResource(R.drawable.error_drawable)
                 blog_error_one.visibility = View.VISIBLE
                 blog_error_two.visibility = View.GONE
                 blog_error_three.visibility = View.GONE
 
+                //Checking if the title editText is empty or null
             } else if (title.isNullOrEmpty()) {
+                //setting error massage on title editText
                 blogTitle.setBackgroundResource(R.drawable.error_drawable)
                 blog_error_one.visibility = View.GONE
                 blog_error_two.visibility = View.VISIBLE
                 blog_error_three.visibility = View.GONE
+
+                //Checking if the blogstory editText is empty or null
             } else if (story.isNullOrEmpty()) {
+
+                //setting error massage on blogstory editText
                 blogStory.setBackgroundResource(R.drawable.error_drawable)
                 blog_error_one.visibility = View.GONE
                 blog_error_two.visibility = View.GONE
                 blog_error_three.visibility = View.VISIBLE
             } else {
 
+                //Converting the image URl to string
                 val imageUrl = imageaddress.toString()
+
+                //passing the user input to Blog data class
                 val captureBlog = Blog(
                     0,
                     imageUrl,
@@ -215,15 +238,22 @@ class AddBlogFragment : Fragment(){
                 )
 
 
+                //checking if the blog object holding the repopulated data is empty
                 if (blog == null) {
+
+                    //seting the blog post to the viewmodel to insert/save in the database
                     model.setBlog(captureBlog, context!!)
+                    Toast.makeText(context, "Post Saved", Toast.LENGTH_SHORT).show()
+
                 } else {
 
+                    //seting the updated blog to the viewmodel to insert/save in the database
                     captureBlog.id = blog!!.id
                     model.updateBlog(captureBlog, context!!)
-
+                    Toast.makeText(context, "Post Updated", Toast.LENGTH_SHORT).show()
                 }
 
+                //return navigation to the blogFragment
                 this.findNavController().navigateUp()
             }
         }

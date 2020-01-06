@@ -1,19 +1,18 @@
-package com.itex.blogapplication.ui.home.blog
+package com.itex.blogapplication.ui.home.blog.blogview
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.itex.blogapplication.R
 import com.itex.blogapplication.data.db.OnItemClickListener
 import com.itex.blogapplication.databinding.BlogFragmentBinding
-import kotlinx.android.synthetic.main.add_blog_fragment.*
+import com.itex.blogapplication.ui.home.blog.Blog
+import com.itex.blogapplication.ui.home.model.BlogViewModel
 
 
 class BlogFragment: Fragment() {
@@ -28,30 +27,39 @@ class BlogFragment: Fragment() {
 
         val model = ViewModelProviders.of(this)[BlogViewModel::class.java]
 
+
+        //binding the recyclerview from the view
         val recyclerView = binding.recycler
 
+
+        //setting a layout manager for the recyclerview
         recyclerView.layoutManager = LinearLayoutManager(context)
 
 
+        //parsing onclicklistener to the adapter to navigate
         var adapter =
             BlogAdapter(object :
 
-                OnItemClickListener{
+                OnItemClickListener {
 
-                override fun OnItemClick(blog: Blog){
+                override fun OnItemClick(blog: Blog) {
 
-                 val action = BlogFragmentDirections.actionBlogFragmentToSpecificBlogFragment2(
+                    val action =
+                        BlogFragmentDirections.actionBlogFragmentToSpecificBlogFragment2(
                             blog
-                 )
+                        )
                     findNavController().navigate(action)
                 }
 
             }, model.apply {
 
-            },context!!)
+            }, context!!)
 
+        //setting up the adapter
         recyclerView.adapter = adapter
 
+
+        //observing changes in the Blog via the viewModel
         model.getBlogs(context!!).observe(this, Observer<List<Blog>>{ blogs ->
 
             blogs?.let {
@@ -60,12 +68,12 @@ class BlogFragment: Fragment() {
 
                 adapter.notifyDataSetChanged()
             }
-
-            // Update UI
         })
 
         return binding.root
 
 
     }
+
+
 }

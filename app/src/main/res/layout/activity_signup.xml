@@ -11,7 +11,7 @@
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:id="@+id/root_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -20,16 +20,13 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView"
-            android:layout_width="347dp"
-            android:layout_height="550dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="50dp"
             android:layout_marginEnd="10dp"
             app:cardCornerRadius="30dp"
-            app:cardElevation="7dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:cardElevation="7dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -117,6 +114,15 @@
                     android:text="Email is required"
                     android:textColor="@color/colorAccent"
                     android:textSize="12sp"
+                    android:textStyle="italic"
+                    android:visibility="gone" />
+                <ProgressBar
+                    android:id="@+id/progress_circular2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/colorAccent"
+                    android:layout_gravity="center"
                     android:textStyle="italic"
                     android:visibility="gone" />
 
@@ -231,5 +237,5 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 </layout>

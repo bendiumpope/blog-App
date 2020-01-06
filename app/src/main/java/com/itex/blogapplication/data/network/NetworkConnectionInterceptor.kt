@@ -6,6 +6,8 @@ import com.itex.blogapplication.util.NoInternetException
 import okhttp3.Interceptor
 import okhttp3.Response
 
+
+//Check if network is available or not
 class NetworkConnectionInterceptor(context: Context): Interceptor {
 
     private val applicationContext = context.applicationContext

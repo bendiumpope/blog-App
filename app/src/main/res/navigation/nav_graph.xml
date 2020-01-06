@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/blogFragment"
-        android:name="com.itex.blogapplication.ui.home.blog.BlogFragment"
+        android:name="com.itex.blogapplication.ui.home.blog.blogview.BlogFragment"
         android:label="blog posts"
         tools:layout="@layout/blog_fragment">
         <action

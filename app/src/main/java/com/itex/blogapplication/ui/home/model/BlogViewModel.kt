@@ -1,10 +1,11 @@
-package com.itex.blogapplication.ui.home.blog
+package com.itex.blogapplication.ui.home.model
 
 import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.itex.blogapplication.data.db.BlogDB
+import com.itex.blogapplication.ui.home.blog.Blog
 
 class BlogViewModel: ViewModel() {
 
@@ -24,17 +25,17 @@ class BlogViewModel: ViewModel() {
         return BlogDB.createDB(context).BlogDao().insertBlog(blog)
     }
 
-    fun updateBlog(blog:Blog, context: Context){
+    fun updateBlog(blog: Blog, context: Context){
 
         return BlogDB.createDB(context).BlogDao().updateBlog(blog)
     }
 
-    fun deleteBlogs(blog: Blog, context: Context){
+    fun deleteBlog(blog: Blog, context: Context){
         return BlogDB.createDB(context).BlogDao().deleteBlog(blog)
     }
 
     private fun loadBlogs() {
-        // Do an asynchronous operation to fetch users.
+
     }
 
 }
