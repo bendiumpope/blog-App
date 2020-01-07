@@ -12,7 +12,6 @@ import com.itex.blogapplication.util.Coroutines
 import com.itex.blogapplication.util.NoInternetException
 
 class AuthViewModel(
-    //injecting UserRepository
     private val repository: UserRepository
 ) : ViewModel(){
 
